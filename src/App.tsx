@@ -1,12 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
-function App() {
-  const someMessage = 'message';
+import { ProvideAuth } from './hooks/useAuth/useAuth';
 
+function App() {
   return (
-    <div className="App">
-      <h1>App</h1>
-      {someMessage}
-    </div>
+    <ProvideAuth>
+      <div className="App">
+        <h1>App</h1>
+      </div>
+    </ProvideAuth>
   );
 }
 
