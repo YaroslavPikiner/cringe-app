@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 
-import { setItem, getItem } from '../../utils/localStorage';
+import localStorageApi from '../../utils/localStorage';
 
 const authContext: React.Context<any> = createContext(null);
 
@@ -22,7 +22,7 @@ function useProvideAuth() {
   const [haveAccount, setAccount] = useState();
 
   function logIn(userName: string, pass: string): void {
-    if (getItem(userName) === pass) {
+    if (localStorageApi.get(userName) === pass) {
       setUser({
         name: userName,
         password: pass,
@@ -36,7 +36,7 @@ function useProvideAuth() {
 
   function signUp(userName: string, pass: string) {
     if (userName && pass) {
-      setItem(userName, pass);
+      localStorageApi.set(userName, pass);
       logIn(userName, pass);
     }
   }

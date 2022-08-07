@@ -1,7 +1,38 @@
-export const setItem = (name: string, value: string) => localStorage.setItem(name, value);
+/* eslint-disable class-methods-use-this */
+class LocalStorageApi {
+  get = (key: string) => {
+    try {
+      const serializeData = localStorage.getItem(key);
 
-export const getItem = (name: string) => localStorage.getItem(name);
+      if (serializeData === null) {
+        return undefined;
+      }
 
-export const removeKey = (name: string) => localStorage.removeItem(name);
+      return JSON.parse(serializeData) as unknown;
+    } catch (error) {
+      return undefined;
+    }
+  };
 
-export const clearLocalStorage = () => localStorage.clear();
+  set = (key: string, data: unknown): void => {
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
+
+  remove = (key: string): void => {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
+}
+
+const localStorageApi = new LocalStorageApi();
+
+export default localStorageApi;
