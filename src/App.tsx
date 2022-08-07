@@ -1,11 +1,13 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from 'react';
+
 import { ProvideAuth } from './hooks/useAuth/useAuth';
+import Router from './pages/Router';
 
 function App() {
   return (
     <ProvideAuth>
       <div className="App">
-        <h1>App</h1>
+        <Router />
       </div>
     </ProvideAuth>
   );
